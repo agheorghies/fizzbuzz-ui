@@ -1,0 +1,28 @@
+<h1>Form</h1>
+<div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>First</mat-label>
+            <input matInput autocomplete="false" type="number" formControlName="firstValue">
+            <mat-hint>The fizzbuzz sequence starts here</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Last</mat-label>
+            <input matInput autocomplete="false" type="number" formControlName="lastValue">
+            <mat-hint>The fizzbuzz sequence ends here</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button>Submit</button>
+    </form>
+    <div *ngIf="formGroup.errors?.sequenceViolation && (formGroup.touched || formGroup.dirty)"
+        class="cross-validation-error-message alert alert-danger">
+        The first value must be lower than the last value.
+    </div>
+    <div>
+        <mat-list>
+            <mat-list-item *ngFor="let number of series">{{number}}</mat-list-item>
+        </mat-list>
+    </div>
+    <div *ngIf="error">
+        An error occured when interacting with the fizzbuzz service.
+    </div>
+</div>
